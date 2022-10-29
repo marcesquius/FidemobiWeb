@@ -1,14 +1,11 @@
-
 'use strict';
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js'
 
-//import { initializeApp } from 'firebase/app';
 import {
 	getAuth,
 	onAuthStateChanged,
 	signInWithEmailAndPassword,
-	//createUserWithEmailAndPassword,
 	signOut,
   } from 'https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js';
 
@@ -20,9 +17,11 @@ export const signIn = (email, password) => {
 	signInWithEmailAndPassword(getAuth(), email, password)
 	.then((userCredential) => {
 		console.log('SignIn by Function')
-		window.location = 'escritorio/escritorio.html';
+		window.location = 'main/main.html';
 	}).catch((error) => {
-		console.log(error.code, error.message);
+		var errorModal= document.getElementById("errorModal");
+		var errorModalPopup = new bootstrap.Modal(errorModal, {});
+		errorModalPopup.show();
 	});	
 }
 
@@ -34,9 +33,8 @@ export function initFirebaseAuth() {
 		//user = getAuth().currentUser.email;
 		//if (getAuth().currentUser != null){
 		if (user != null){
-			window.location = 'escritorio/escritorio.html';
+			window.location = 'main/main.html';
 		}
-		//console.log(getAuth().currentUser.email)
 	});
 }
 
