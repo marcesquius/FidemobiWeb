@@ -3,7 +3,7 @@ import{
 } from './firebase.js'
 
 var logOutButtonElement = document.getElementById('logout');
-var liActive = document.getElementById("sliders");
+var liActive = document.getElementById("blank");
 liActive.className += " active";
 
 //window.addEventListener("DOMContentLoaded", () => {
@@ -16,5 +16,3 @@ logOutButtonElement.addEventListener('click', (e) => {
 	e.preventDefault();
 	signOutUser();
 })
-
-
