@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords"
+		content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="../img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>Blank Page | AdminKit Demo</title>
+
+	<link href="../css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<div id="sidebar_container"></div>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+				<div id="headers_container" class="container"></div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Datos Comercio</h1>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<button class="btn" onclick="history.back()"> << Go Back</button>
+									<!-- h5 class="card-title mb-0">Añade o modifica datos del comercio</h5 -->
+								</div>
+								<div class="card-body">
+									<div class="container">
+										<div class="row">
+											<div class="col-lg-8">
+								
+												<form id="promo-form">
+													<div class="card mb-3">
+														<div class="card-header">
+															<div class="container">
+																<div class="row">
+																	<div class="col">
+																		<h3>Datos Promoción</h3>
+																		<div id="copyedit"></div>
+																	</div>
+																	<div class="col align-content-sm-center">
+																		<div class="form-check form-switch float-end">
+																			<input class="form-check-input" type="checkbox" id="isdemo"
+																				name="isdemo" checked>
+																			<label class="form-check-label" for="flexSwitchCheckChecked">Es Demo</label>
+																		</div>
+																	</div>
+																</div>
+								
+								
+															</div>
+								
+														</div>
+								
+														<div class="card-body">
+															<!--Nombre Promo-->
+															<div class="row">
+																<div class="col">
+																	<label for="name">Nombre de la promo:</label>
+																	<input type="text" name="name" placeholder="" id="namae" value=""
+																		class="form-control mb-3">
+																</div>
+								
+																<div class="col">
+																	<label for="description">Descripción:</label>
+																	<input type="text" name="description" placeholder="" id="description" value=""
+																		class="form-control mb-3">
+																</div>
+															</div>
+								
+															<div class="row">
+																<!-- div class="col">
+																	<label for="id">Id:</label>
+																	<input type="text" name="id" placeholder="Id" id="id" value=""
+																		class="form-control mb-3">
+																</div -->
+								
+																<div class="col">
+																	<label for="order">Orden:</label>
+																	<input type="text" name="order" placeholder="" id="order" value=""
+																		class="form-control mb-3">
+																</div>
+								
+																<!--Categorias-->
+																<div class="col">
+								
+																	<label for="tags">Categorias:</label>
+																	<select class="form-select form-control mb-3" name="tags" id="tags" multiple
+																		aria-label="multiple select example">
+																		<option value="al" selected>Todas</option>
+																		<option value="panaderia">Panaderia</option>
+																		<option value="cafeteria">Cafeteria</option>
+																		<option value="rest">Restaurant</option>
+																		<option value="medalla_oro">Medalla Oro</option>
+																		<option value="granel">Granel</option>
+																		<option value="ta">Tapas</option>
+																		<option value="pets">Animales</option>
+																		<option value="ho">Hogar</option>
+																	</select>
+								
+																</div>
+															</div>
+								
+								
+															<!--Colores-->
+															<div class="row">
+																<div class="section h5">Colores</div>
+																<div class="col">
+																	<label for="bgcolor" class="form-label">Color de Fondo:</label>
+																	<input type="color" class="form-control form-control-color mb-3" name="bgcolor"
+																		id="bgcolor" value="#FFFFFF" title="Choose your color">
+																</div>
+								
+																<div class="col">
+																	<label for="titlecolor" class="form-label">Color del Título:</label>
+																	<input type="color" class="form-control form-control-color mb-3" name="titlecolor"
+																		id="titlecolor" value="#000000" title="Choose your color">
+																</div>
+								
+																<div class="col">
+																	<label for="textcolor" class="form-label">Color de Texto:</label>
+																	<input type="color" class="form-control form-control-color mb-3" name="textcolor"
+																		id="textcolor" value="#606060" title="Choose your color">
+																</div>
+								
+															</div>
+								
+															<!-- Imágenes -->
+															<div class="row">
+																<div class="section h5">Imágenes</div>
+																<div class="col">
+																	<label for="imageurl">Imágen Promo:</label>
+																	<!-- input type="file" id="imageurl" accept="image/jpeg, image/png, image/jpg" class="form-control mb-3" -->
+																	<!-- is OK input type="text" name="imageurl" placeholder="" id="imageurl" value="" class="form-control mb-3" -->
+																	
+																	<select class="form-select form-control mb-3" name="icon" id="imageurl" aria-label="select example">
+																		
+																	</select>
+																	
+																	
+																	
+																	
+																	<div class="container">
+																		<div id="displayImgurl"></div> 
+																	</div>
+																	
+								
+																</div>
+								
+																<div class="col">
+																	<label for="imagevalad">Imágen Publicidad Validación:</label>
+																	<input type="text" name="imagevalad" placeholder="" id="imagevalad" value=""
+																		class="form-control mb-3">
+																		<div class="container">
+																			<div id="displayImagevalad"></div> 
+																		</div>
+																</div>
+															</div>
+								
+															<!-- Iconos -->
+															<div class="row">
+																<div class="section h5">Iconos</div>
+																<!-- Icon-->
+																<div class="col">
+																	<label for="icon">Icono</label>
+																	<!-- input type="text" name="icon" placeholder="" id="icon" value="" class="form-control mb-3" -->
+																	<select class="form-select form-control mb-3" name="icon" id="icon" aria-label="select example">
+																	<option value="">Seleccionar...</option>
+																	<option value="DetergenteLAV">Detergentelav</option>
+																	<option value="aguacate">Aguacate</option>
+																	<option value="beer">Beer</option>
+																	<option value="bravas">Bravas</option>
+																	<option value="brioche">Brioche</option>
+																	<option value="burguer">Burguer</option>
+																	<option value="cabdell">Cabdell</option>
+																	<option value="cafe">Cafe</option>
+																	<option value="cafeG">Cafeg</option>
+																	<option value="cafeN">Cafen</option>
+																	<option value="cajaregalo">Cajaregalo</option>
+																	<option value="cake">Cake</option>
+																	<option value="caniche">Caniche</option>
+																	<option value="car">Car</option>
+																	<option value="cat">Cat</option>
+																	<option value="catr">Catr</option>
+																	<option value="catsm">Catsm</option>
+																	<option value="cava">Cava</option>
+																	<option value="CESTA">Cesta</option>
+																	<option value="chicken">Chicken</option>
+																	<option value="churros">Churros</option>
+																	<option value="circle">Circle</option>
+																	<option value="circlenescafe">Circlenescafe</option>
+																	<option value="coffeN">Coffen</option>
+																	<option value="cook">Cook</option>
+																	<option value="cookie">Cookie</option>
+																	<option value="crepe">Crepe</option>
+																	<option value="croissant">Croissant</option>
+																	<option value="croqueta">Croqueta</option>
+																	<option value="cruzroja">Cruzroja</option>
+																	<option value="desayuno">Desayuno</option>
+																	<option value="dog">Dog</option>
+																	<option value="doga">Doga</option>
+																	<option value="dogp">Dogp</option>
+																	<option value="donut">Donut</option>
+																	<option value="dosporuno">Dosporuno</option>
+																	<option value="empanada">Empanada</option>
+																	<option value="ensalada">Ensalada</option>
+																	<option value="entrepa">Entrepa</option>
+																	<option value="eye">Eye</option>
+																	<option value="falafel">Falafel</option>
+																	<option value="file">File</option>
+																	<option value="fish">Fish</option>
+																	<option value="fisio">Fisio</option>
+																	<option value="fries">Fries</option>
+																	<option value="friesdrink">Friesdrink</option>
+																	<option value="fruit">Fruit</option>
+																	<option value="gen">Gen</option>
+																	<option value="glasses">Glasses</option>
+																	<option value="hacker">Hacker</option>
+																	<option value="he">He</option>
+																	<option value="hotdog">Hotdog</option>
+																	<option value="huellap">Huellap</option>
+																	<option value="hueso">Hueso</option>
+																	<option value="ice">Ice</option>
+																	<option value="icep">Icep</option>
+																	<option value="ina">Ina</option>
+																	<option value="kebab">Kebab</option>
+																	<option value="labrador">Labrador</option>
+																	<option value="love">Love</option>
+																	<option value="margarita">Margarita</option>
+																	<option value="menu">Menu</option>
+																	<option value="michelada">Michelada</option>
+																	<option value="mufin">Mufin</option>
+																	<option value="murnil">Murnil</option>
+																	<option value="nail">Nail</option>
+																	<option value="pa">Pa</option>
+																	<option value="paella">Paella</option>
+																	<option value="pelug">Pelug</option>
+																	<option value="pienso">Pienso</option>
+																	<option value="pierre">Pierre</option>
+																	<option value="pizza">Pizza</option>
+																	<option value="pizzat">Pizzat</option>
+																	<option value="polloalast">Polloalast</option>
+																	<option value="potato">Potato</option>
+																	<option value="premio">Premio</option>
+																	<option value="qr">Qr</option>
+																	<option value="ramen">Ramen</option>
+																	<option value="regal">Regal</option>
+																	<option value="regalos">Regalos</option>
+																	<option value="rolls">Rolls</option>
+																	<option value="rosquilla">Rosquilla</option>
+																	<option value="scissors">Scissors</option>
+																	<option value="slice">Slice</option>
+																	<option value="soda">Soda</option>
+																	<option value="suc">Suc</option>
+																	<option value="sushi">Sushi</option>
+																	<option value="taco">Taco</option>
+																	<option value="tapa">Tapa</option>
+																	<option value="tarrina">Tarrina</option>
+																	<option value="teque">Teque</option>
+																	<option value="tio">Tio</option>
+																	<option value="toast">Toast</option>
+																	<option value="trash">Trash</option>
+																	<option value="tuma">Tuma</option>
+																	<option value="vegan">Vegan</option>									
+																	</select>
+																	
+																	<div class="container text-center ">
+																		<div class="row">
+																			<div id="displayicon"></div>
+																		</div> 	
+																	</div>
+																</div>
+																<!-- IconPresent-->
+																<div class="col">
+																	<label for="iconpresent">Icono Regalo</label>
+																	<select class="form-select form-control mb-3" name="iconpresent" id="iconpresent" aria-label="select example">
+																	<option value="">Seleccionar...</option>
+																	<option value="DetergenteLAV">Detergentelav</option>
+																	<option value="aguacate">Aguacate</option>
+																	<option value="beer">Beer</option>
+																	<option value="bravas">Bravas</option>
+																	<option value="brioche">Brioche</option>
+																	<option value="burguer">Burguer</option>
+																	<option value="cabdell">Cabdell</option>
+																	<option value="cafe">Cafe</option>
+																	<option value="cafeG">Cafeg</option>
+																	<option value="cafeN">Cafen</option>
+																	<option value="cajaregalo">Cajaregalo</option>
+																	<option value="cake">Cake</option>
+																	<option value="caniche">Caniche</option>
+																	<option value="car">Car</option>
+																	<option value="cat">Cat</option>
+																	<option value="catr">Catr</option>
+																	<option value="catsm">Catsm</option>
+																	<option value="cava">Cava</option>
+																	<option value="CESTA">Cesta</option>
+																	<option value="chicken">Chicken</option>
+																	<option value="churros">Churros</option>
+																	<option value="circle">Circle</option>
+																	<option value="circlenescafe">Circlenescafe</option>
+																	<option value="coffeN">Coffen</option>
+																	<option value="cook">Cook</option>
+																	<option value="cookie">Cookie</option>
+																	<option value="crepe">Crepe</option>
+																	<option value="croissant">Croissant</option>
+																	<option value="croqueta">Croqueta</option>
+																	<option value="cruzroja">Cruzroja</option>
+																	<option value="desayuno">Desayuno</option>
+																	<option value="dog">Dog</option>
+																	<option value="doga">Doga</option>
+																	<option value="dogp">Dogp</option>
+																	<option value="donut">Donut</option>
+																	<option value="dosporuno">Dosporuno</option>
+																	<option value="empanada">Empanada</option>
+																	<option value="ensalada">Ensalada</option>
+																	<option value="entrepa">Entrepa</option>
+																	<option value="eye">Eye</option>
+																	<option value="falafel">Falafel</option>
+																	<option value="file">File</option>
+																	<option value="fish">Fish</option>
+																	<option value="fisio">Fisio</option>
+																	<option value="fries">Fries</option>
+																	<option value="friesdrink">Friesdrink</option>
+																	<option value="fruit">Fruit</option>
+																	<option value="gen">Gen</option>
+																	<option value="glasses">Glasses</option>
+																	<option value="hacker">Hacker</option>
+																	<option value="he">He</option>
+																	<option value="hotdog">Hotdog</option>
+																	<option value="huellap">Huellap</option>
+																	<option value="hueso">Hueso</option>
+																	<option value="ice">Ice</option>
+																	<option value="icep">Icep</option>
+																	<option value="ina">Ina</option>
+																	<option value="kebab">Kebab</option>
+																	<option value="labrador">Labrador</option>
+																	<option value="love">Love</option>
+																	<option value="margarita">Margarita</option>
+																	<option value="menu">Menu</option>
+																	<option value="michelada">Michelada</option>
+																	<option value="mufin">Mufin</option>
+																	<option value="murnil">Murnil</option>
+																	<option value="nail">Nail</option>
+																	<option value="pa">Pa</option>
+																	<option value="paella">Paella</option>
+																	<option value="pelug">Pelug</option>
+																	<option value="pienso">Pienso</option>
+																	<option value="pierre">Pierre</option>
+																	<option value="pizza">Pizza</option>
+																	<option value="pizzat">Pizzat</option>
+																	<option value="polloalast">Polloalast</option>
+																	<option value="potato">Potato</option>
+																	<option value="premio">Premio</option>
+																	<option value="qr">Qr</option>
+																	<option value="ramen">Ramen</option>
+																	<option value="regal">Regal</option>
+																	<option value="regalos">Regalos</option>
+																	<option value="rolls">Rolls</option>
+																	<option value="rosquilla">Rosquilla</option>
+																	<option value="scissors">Scissors</option>
+																	<option value="slice">Slice</option>
+																	<option value="soda">Soda</option>
+																	<option value="suc">Suc</option>
+																	<option value="sushi">Sushi</option>
+																	<option value="taco">Taco</option>
+																	<option value="tapa">Tapa</option>
+																	<option value="tarrina">Tarrina</option>
+																	<option value="teque">Teque</option>
+																	<option value="tio">Tio</option>
+																	<option value="toast">Toast</option>
+																	<option value="trash">Trash</option>
+																	<option value="tuma">Tuma</option>
+																	<option value="vegan">Vegan</option>									
+																	</select>
+																	
+																	<div class="container text-center ">
+																		<div class="row">
+																			<div id="displayiconpresent"></div>
+																		</div> 	
+																	</div>
+																</div>
+																<!-- IconMidPresent-->
+																<div class="col">
+																	<label for="iconmidpresent">Icono Regalo Intermedio</label>
+																	<select class="form-select form-control mb-3" name="iconmidpresent" id="iconmidpresent" aria-label="select example">
+																	<option value="">Seleccionar...</option>
+																	<option value="DetergenteLAV">Detergentelav</option>
+																	<option value="aguacate">Aguacate</option>
+																	<option value="beer">Beer</option>
+																	<option value="bravas">Bravas</option>
+																	<option value="brioche">Brioche</option>
+																	<option value="burguer">Burguer</option>
+																	<option value="cabdell">Cabdell</option>
+																	<option value="cafe">Cafe</option>
+																	<option value="cafeG">Cafeg</option>
+																	<option value="cafeN">Cafen</option>
+																	<option value="cajaregalo">Cajaregalo</option>
+																	<option value="cake">Cake</option>
+																	<option value="caniche">Caniche</option>
+																	<option value="car">Car</option>
+																	<option value="cat">Cat</option>
+																	<option value="catr">Catr</option>
+																	<option value="catsm">Catsm</option>
+																	<option value="cava">Cava</option>
+																	<option value="CESTA">Cesta</option>
+																	<option value="chicken">Chicken</option>
+																	<option value="churros">Churros</option>
+																	<option value="circle">Circle</option>
+																	<option value="circlenescafe">Circlenescafe</option>
+																	<option value="coffeN">Coffen</option>
+																	<option value="cook">Cook</option>
+																	<option value="cookie">Cookie</option>
+																	<option value="crepe">Crepe</option>
+																	<option value="croissant">Croissant</option>
+																	<option value="croqueta">Croqueta</option>
+																	<option value="cruzroja">Cruzroja</option>
+																	<option value="desayuno">Desayuno</option>
+																	<option value="dog">Dog</option>
+																	<option value="doga">Doga</option>
+																	<option value="dogp">Dogp</option>
+																	<option value="donut">Donut</option>
+																	<option value="dosporuno">Dosporuno</option>
+																	<option value="empanada">Empanada</option>
+																	<option value="ensalada">Ensalada</option>
+																	<option value="entrepa">Entrepa</option>
+																	<option value="eye">Eye</option>
+																	<option value="falafel">Falafel</option>
+																	<option value="file">File</option>
+																	<option value="fish">Fish</option>
+																	<option value="fisio">Fisio</option>
+																	<option value="fries">Fries</option>
+																	<option value="friesdrink">Friesdrink</option>
+																	<option value="fruit">Fruit</option>
+																	<option value="gen">Gen</option>
+																	<option value="glasses">Glasses</option>
+																	<option value="hacker">Hacker</option>
+																	<option value="he">He</option>
+																	<option value="hotdog">Hotdog</option>
+																	<option value="huellap">Huellap</option>
+																	<option value="hueso">Hueso</option>
+																	<option value="ice">Ice</option>
+																	<option value="icep">Icep</option>
+																	<option value="ina">Ina</option>
+																	<option value="kebab">Kebab</option>
+																	<option value="labrador">Labrador</option>
+																	<option value="love">Love</option>
+																	<option value="margarita">Margarita</option>
+																	<option value="menu">Menu</option>
+																	<option value="michelada">Michelada</option>
+																	<option value="mufin">Mufin</option>
+																	<option value="murnil">Murnil</option>
+																	<option value="nail">Nail</option>
+																	<option value="pa">Pa</option>
+																	<option value="paella">Paella</option>
+																	<option value="pelug">Pelug</option>
+																	<option value="pienso">Pienso</option>
+																	<option value="pierre">Pierre</option>
+																	<option value="pizza">Pizza</option>
+																	<option value="pizzat">Pizzat</option>
+																	<option value="polloalast">Polloalast</option>
+																	<option value="potato">Potato</option>
+																	<option value="premio">Premio</option>
+																	<option value="qr">Qr</option>
+																	<option value="ramen">Ramen</option>
+																	<option value="regal">Regal</option>
+																	<option value="regalos">Regalos</option>
+																	<option value="rolls">Rolls</option>
+																	<option value="rosquilla">Rosquilla</option>
+																	<option value="scissors">Scissors</option>
+																	<option value="slice">Slice</option>
+																	<option value="soda">Soda</option>
+																	<option value="suc">Suc</option>
+																	<option value="sushi">Sushi</option>
+																	<option value="taco">Taco</option>
+																	<option value="tapa">Tapa</option>
+																	<option value="tarrina">Tarrina</option>
+																	<option value="teque">Teque</option>
+																	<option value="tio">Tio</option>
+																	<option value="toast">Toast</option>
+																	<option value="trash">Trash</option>
+																	<option value="tuma">Tuma</option>
+																	<option value="vegan">Vegan</option>									
+																	</select>
+																	
+																	<div class="container text-center ">
+																		<div class="row">
+																			<div id="displayiconmidpresent"></div>
+																		</div> 	
+																	</div>
+																</div>
+								
+															</div>
+								
+								
+															<div class="row justify-content-between">
+																<div class="col-4">
+																	<label for="numberOfValidations">Número Validaciones</label>
+																	<input type="text" name="numberOfValidations" placeholder=""
+																		id="numberOfValidations" class="form-control mb-3">
+																</div>
+								
+																<div class="col-4">
+																	<label for="maxValxDay">Máximo número validaciones dia</label>
+																	<input type="text" name="maxvalxday" placeholder="" id="maxvalxday" class="form-control mb-3">
+																</div>
+								
+																<div class="col-4">
+																	<label for="midPresentAt">Posición Regalo Intermedio</label>
+																	<input type="text" name="midPresentAt" placeholder="" id="midPresentAt" class="form-control mb-3">
+																</div>
+															</div>
+								
+															<!-- Caducidad -->
+															<div class="row">
+																<div class="section h5">Caduca</div>
+																<div class="col">
+																	<label class="form-check-label" for="expires">No/Sí</label>
+																	<div class="col align-content-sm-center">
+																		<div class="form-check form-switch float-start">
+																			<input class="form-check-input" type="checkbox" id="expires" name="expires">
+																		</div>
+																	</div>
+																</div>
+								
+																<div class="col">
+																	<label class="form-check-label" for="fecha">en Fecha:</label>
+																	<div class="input-group date" id="enddate" name="enddate">
+																		<input type="text" class="form-control" id="enddate" name="enddate">
+																		<span class="input-group-append">
+																			<span class="input-group-text bg-white d-block">
+																				<i class="fa fa-calendar"></i>
+																			</span>
+																		</span>
+																	</div>
+																</div>
+								
+																<div class="col">
+																	<label for="dias">en Dias:</label>
+																	<input type="text" name="dias" placeholder="" id="dias" class="form-control mb-3">
+																</div>
+															</div>
+								
+															<!-- Funcionalidades -->
+															<div class="row">
+																<div class="section h5">Funcionalidades</div>
+																<div class="col">
+																	<label class="form-check-label" for="readd">Volver a añadir (No/Sí)</label>
+																	<div class="col align-content-sm-center">
+																		<div class="form-check form-switch float-start">
+																			<input class="form-check-input" type="checkbox" id="readd" name="readd">
+																		</div>
+																	</div>
+																</div>
+								
+																<div class="col">
+																	<label class="form-check-label" for="multivalidation">Multivalidación (No/Sí)</label>
+																	<div class="col align-content-sm-center">
+																		<div class="form-check form-switch float-start">
+																			<input class="form-check-input" type="checkbox" id="multivalidation"
+																				name="multivalidation">
+																		</div>
+																	</div>
+																</div>
+								
+																<div class="col">
+																	<label for="maxValxDay">Validaciones Iniciales:</label>
+																	<input type="text" name="startwith" placeholder="" id="startwith"
+																		class="form-control mb-3">
+																</div>
+								
+																<div class="col">
+																	<label for="sharedCode">Código compartir:</label>
+																	<input type="text" name="sharedcode" placeholder="" id="sharedcode"
+																		class="form-control mb-3">
+																</div>
+															</div>
+								
+															<!--Sorteo-->
+															<div class="row">
+																<div class="section h5">Sorteo</div>
+																<div class="col">
+																	<label for="lotteryid">Código Sorteo:</label>
+																	<input type="text" name="lotteryid" id="idsorteo"
+																		class="form-control mb-3">
+																</div>
+								
+																<div class="col">
+																	<label for="lotteryfrequency">Entregamos participación cada:</label>
+																	<input type="text" name="lotteryfrequency" id="lotteryfrequency"
+																		 class="form-control mb-3">
+																</div>
+															</div>
+								
+															<!--Condiciones-->
+															<div class="row">
+																<div class="section h5">Condiciones</div>
+																<div class="col">
+																	<!-- label for="conditions">Condiciones</label -->
+																	<textarea rows="5" name="conditions" id="conditions"
+																		class="form-control mb-3"></textarea>
+																</div>
+								
+															</div>
+								
+															<!-- Validation Cards -->
+															<div class="row">
+																<div class="section h5">Códigos Tarjetas Validación</div>
+																<div class="col">
+																	<label for="lotteryid">Tarjetas:</label>
+																	<input type="text" name="lotteryid" placeholder="" id="cards"
+																		class="form-control mb-3">
+																</div>
+															</div>
+														</div>
+								
+														<div class="card-footer text-muted">
+															<button id="btn-promo-reset" class="btn btn-secondary btn-block ">RESET</button>
+								
+															<button id="btn-promo-save" class="btn btn-primary btn-block float-end">ADD</button>
+														</div>
+														
+														<!--Image QR Code-->
+														<div class="row">
+															<div class="container text-center" id="qrcode"></div>
+														</div>
+														
+													</div>
+								
+												</form>
+											
+											</div>
+											<div class="col-lg-4">
+												<div class="card mb-3">
+													<div class="card-header">
+														<div class="h3">Promociones</div>
+													</div>
+													<div class="card-body">
+														<div class="container" id="promos-container"></div>
+													</div>
+												</div>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<div id="footer_container"></div>
+
+		</div>
+	</div>
+
+	<script src="../utils/app.js"></script>
+	<script type="module" src="../js/pages-promotions.js"></script>
+	<script>
+		//$('#sliders').addClass('active');
+		//liActive.addClass('active');
+		function loadComponentFromFile(filepath, location) {
+
+			var client = new XMLHttpRequest();
+			client.open('GET', filepath);
+			client.onreadystatechange = function () {
+				location.innerHTML = client.responseText;
+			}
+			client.send();
+		}
+
+		var headers_container = document.getElementById("headers_container");
+		var content = loadComponentFromFile('./header.html', headers_container);
+		var sidebar_container = document.getElementById("sidebar_container");
+		var content = loadComponentFromFile('./sidebar.html', sidebar_container);
+		var footer_container = document.getElementById("footer_container");
+		var content = loadComponentFromFile('./footer.html', footer_container);
+	</script>
+		<!-- CUSTOM CODE-->
+		<script type="text/javascript">
+			$(function () {
+				$('#enddate').datepicker({
+					format: {
+						/*
+						 * Say our UI should display a week ahead,
+						 * but textbox should store the actual date.
+						 * This is useful if we need UI to select local dates,
+						 * but store in UTC
+						 */
+						toDisplay: function (date, format, language) {
+							var d = new Date(date);
+							//d.setDate(d.getDate() - 7);
+							//return d.toISOString();
+							return formatDate(d);
+						},
+						toValue: function (date, format, language) {
+							var d = new Date(date);
+							//d.setDate(d.getDate() + 7);
+							//return new Date(d);
+							return formatDate(d);
+						}
+					}
+				});
+			});
+	
+			function padTo2Digits(num) {
+				return num.toString().padStart(2, '0');
+			}
+	
+			function formatDate(date) {
+				return [
+					padTo2Digits(date.getDate()),
+					padTo2Digits(date.getMonth() + 1),
+					date.getFullYear(),
+				].join('-');
+			}
+		</script>
+</body>
+
+</html>

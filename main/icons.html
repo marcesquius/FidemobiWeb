@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <!-- BOOTSTRAP CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module" src="js/icons.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="container">
+                    <div class="container p-4" id="img-list"></div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <form id="icons-form" class="" action="icons.html" method="post">
+                    <label class="btn btn-file">
+                        <!-- input type="file" name="fichero" id="fichero" value="" -->
+                        <input type="file" name="fichero" id="fichero" class="invisible" value="">
+                        <img src="img/upload.jpg" class="img-responsive img-thumbnail w-50 h-50" alt="descargar">
+                    </label>
+                </form>
+                <div class="invisible" id="progreso">
+                    <div class="container text-center"><div class="sr-only text-info text-center" id="bptexto"></div></div>
+                    <div class="progress text-center">
+                        <!-- div class="progress-bar" style="width:70%">70%</div -->
+                        
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="barra-de-progreso">
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

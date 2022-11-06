@@ -1,8 +1,7 @@
-
 import{
 	signIn,
 	initFirebaseAuth,
-} from './firebase.js'
+} from '../utils/firebase.js';
 
 var signInButtonElement = document.getElementById('sign-in');
 

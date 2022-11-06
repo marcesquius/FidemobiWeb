@@ -1,6 +1,6 @@
 import{
 	signOutUser
-} from './firebase.js'
+} from '../utils/firebase.js';
 
 var logOutButtonElement = document.getElementById('logout');
 var liActive = document.getElementById("blank");

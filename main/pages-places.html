@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords"
+		content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="../img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>Blank Page | AdminKit Demo</title>
+
+	<link href="../css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<div id="sidebar_container"></div>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+				<div id="headers_container" class="container"></div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Datos Comercio</h1>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Añade o modifica datos del comercio</h5>
+								</div>
+								<div class="card-body">
+									<div class="container">
+										<div class="row">
+											<div class="col-lg-8">
+								
+												<form id="place-form">
+													<div class="card mb-3">
+														<div class="card-header">
+															<div class="container">
+																<div class="row">
+																	<div class="col">
+																		<!-- h3>Datos Comercio</h3-->
+																		<div id="placeId"></div>
+																	</div>
+																	<div class="col align-content-sm-center">
+																		<div class="form-check form-switch float-end">
+																			<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+																				name="flexSwitchCheckChecked" checked>
+																			<label class="form-check-label" for="flexSwitchCheckChecked">Es Demo</label>
+																		</div>
+																	</div>
+																</div>
+								
+								
+															</div>
+								
+														</div>
+								
+														<div class="card-body">
+															<div class="row">
+																<!-- div class="col">
+																	<label for="id">Id:</label>
+																	<input type="text" name="id" placeholder="Id" id="id" value=""
+																		class="form-control mb-3">
+																</div -->
+								
+																<div class="col">
+																	<label for="company">Company:</label>
+																	<input type="text" name="company" placeholder="" id="company"
+																		value="" class="form-control mb-3">
+																</div>
+
+																<div class="col">
+																	<label for="name">Nombre:</label>
+																	<input type="text" name="name" placeholder="" id="name"
+																		value="" class="form-control mb-3">
+																</div>
+															</div>
+								
+															<div class="row">
+																<div class="col">
+																	<label for="address">Dirección:</label>
+																	<input type="text" name="address" placeholder="" id="address" value=""
+																		class="form-control mb-3">
+																</div>
+								
+																<div class="col">
+																	<label for="phone">Teléfono:</label>
+																	<input type="text" name="phone" placeholder="" id="phone" value=""
+																		class="form-control mb-3">
+																</div>
+															</div>
+								
+															<div class="row">
+																<div class="col">
+																	<label for="address">Latitud:</label>
+																	<input type="text" name="lat" placeholder="" id="lat" value=""
+																		class="form-control mb-3">
+																</div>
+								
+																<div class="col">
+																	<label for="phone">Longitud:</label>
+																	<input type="text" name="lon" placeholder="" id="lon" value=""
+																		class="form-control mb-3">
+																</div>
+															</div>
+								
+														</div>
+								
+														<div class="row p-4">
+															<label for="tags">Categorias:</label>
+																<select class="form-select" name="tags" id="tags" multiple aria-label="multiple select example">
+																	<option value="al" selected>Todas</option>
+																	<option value="panaderia">Panaderia</option>
+																	<option value="cafeteria">Cafeteria</option>
+																	<option value="rest">Restaurant</option>
+																	<option value="medalla_oro">Medalla Oro</option>
+																	<option value="granel">Granel</option>
+																	<option value="ta">Tapas</option>
+																	<option value="pets">Animales</option>
+																	<option value="ho">Hogar</option>
+																</select>
+														</div>
+								
+														<div class="card-footer text-muted">
+															<button id="btn-place-reset" class="btn btn-secondary btn-block ">RESET</button>
+								
+															<button id="btn-place-save" class="btn btn-primary btn-block float-end">AÑADIR</button>
+														</div>
+													</div>
+								
+												</form>
+											</div>
+											<div class="col-lg-4">
+												<div class="card mb-3">
+													<div class="card-header">
+														<div class="h3">Comercios</div>
+													</div>
+													<div class="card-body">
+														<div class="container" id="places-container"></div>
+													</div>
+												</div>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<div id="footer_container"></div>
+
+		</div>
+	</div>
+
+	<script src="../utils/app.js"></script>
+	<script type="module" src="../js/pages-places.js"></script>
+	<script>
+		//$('#sliders').addClass('active');
+		//liActive.addClass('active');
+		function loadComponentFromFile(filepath, location) {
+
+			var client = new XMLHttpRequest();
+			client.open('GET', filepath);
+			client.onreadystatechange = function () {
+				location.innerHTML = client.responseText;
+			}
+			client.send();
+		}
+
+		var headers_container = document.getElementById("headers_container");
+		var content = loadComponentFromFile('./header.html', headers_container);
+		var sidebar_container = document.getElementById("sidebar_container");
+		var content = loadComponentFromFile('./sidebar.html', sidebar_container);
+		var footer_container = document.getElementById("footer_container");
+		var content = loadComponentFromFile('./footer.html', footer_container);
+	</script>
+</body>
+
+</html>

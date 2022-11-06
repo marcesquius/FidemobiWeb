@@ -17,6 +17,20 @@ const config = {
   measurementId: "G-X4GJQ5GVWP"
 };
 
+/** CUPOTIX
+ const firebaseConfig = {
+	apiKey: "AIzaSyBweATLu2WZI4uecXGXl0rm7K0QsirZa0Y",
+	authDomain: "cupotix-d1c19.firebaseapp.com",
+	databaseURL: "https://cupotix-d1c19.firebaseio.com",
+	projectId: "cupotix-d1c19",
+	storageBucket: "cupotix-d1c19.appspot.com",
+	messagingSenderId: "996430804446",
+	appId: "1:996430804446:web:fc47e982c1d6975c38994f",
+	measurementId: "G-1VW95ZF5MC",
+	storageBucket: "cupotix-d1c19.appspot.com",
+};
+ */
+
 export function getFirebaseConfig() {
   if (!config || !config.apiKey) {
     throw new Error('No Firebase configuration object provided.' + '\n' +
