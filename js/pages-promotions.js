@@ -37,9 +37,11 @@ const iconPresentContainer = document.querySelector("#displayiconpresent");
 const iconMidPresentContainer = document.querySelector("#displayiconmidpresent");
 
 // DOM ELEMENTS
-const dropdownIcon = document.getElementById('icon');
-const dropdownIconPresent = document.getElementById('iconpresent');
-const dropdownIconMidPresent = document.getElementById('iconmidpresent');
+const dropdownImage = document.querySelector('#imageurl');
+const dropdownImageValAd = document.querySelector('#imagevalad');
+const dropdownIcon = document.querySelector('#icon');
+const dropdownIconPresent = document.querySelector('#iconpresent');
+const dropdownIconMidPresent = document.querySelector('#iconmidpresent');
 
 /*
 var imgurl = document.getElementById("imgurl"),
@@ -62,8 +64,9 @@ image_input.addEventListener("change", function () {
 */
 const listbox = document.querySelector('#imageurl');
 var placeId = "";
+var usuario = "";
+
 window.addEventListener('DOMContentLoaded', async () => {
-	readPlaceImages();
 
 	placeId = localStorage.getItem("placeID")
 	copyeditField.innerHTML = `<button type="button" class="btn btn-secondary">Added</button>`;
@@ -91,6 +94,10 @@ window.addEventListener('DOMContentLoaded', async () => {
 	onAuthStateChanged(auth, (user) => {
 
 		if (user != null) {
+			usuario = auth.currentUser.uid;
+			readPromoImages();
+			readPromoImagesValAd();
+			readPromoIcons();
 			//onGetPromos(getPlaceId(placeId), (querySnapshot) =>{
 			onGetPromos(placeId, (querySnapshot) =>{
 				promosContainer.innerHTML = "";
@@ -146,9 +153,17 @@ window.addEventListener('DOMContentLoaded', async () => {
 						promoForm['bgcolor'].value = promo.bgColor
 						promoForm['textcolor'].value = promo.textColor
 						promoForm['titlecolor'].value = promo.titleColor
-						promoForm['imageurl'].value = promo.imageUrl
-						promoForm['imagevalad'].value = promo.imageValAd
 
+						for (const option of dropdownImage){
+							const value = option.value
+  							if (promo.imageUrl.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
+  							else { option.removeAttribute('selected');}
+						}
+						for (const option of dropdownImageValAd){
+							const value = option.value
+  							if (promo.imageValAd.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
+  							else { option.removeAttribute('selected');}
+						}
 						
 						for (const option of dropdownIcon){
 							const value = option.value
@@ -157,12 +172,12 @@ window.addEventListener('DOMContentLoaded', async () => {
 						}
 						for (const option of dropdownIconPresent){
 							const value = option.value
-  							if (promo.iconpresent.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
+  							if (promo.iconPresent.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
   							else { option.removeAttribute('selected');}
 						}
 						for (const option of dropdownIconMidPresent){
 							const value = option.value
-  							if (promo.iconmidpresent.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
+  							if (promo.iconMidPresent.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
   							else { option.removeAttribute('selected');}
 						}
 						
@@ -228,9 +243,17 @@ window.addEventListener('DOMContentLoaded', async () => {
 						promoForm['bgcolor'].value = promo.bgColor
 						promoForm['textcolor'].value = promo.textColor
 						promoForm['titlecolor'].value = promo.titleColor
-						promoForm['imageurl'].value = promo.imageUrl
-						promoForm['imagevalad'].value = promo.imageValAd
-						
+
+						for (const option of dropdownImage){
+							const value = option.value
+  							if (promo.imageUrl.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
+  							else { option.removeAttribute('selected');}
+						}
+						for (const option of dropdownImageValAd){
+							const value = option.value
+  							if (promo.imageValAd.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
+  							else { option.removeAttribute('selected');}
+						}
 						for (const option of dropdownIcon){
 							const value = option.value
   							if (promo.icon.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
@@ -238,12 +261,12 @@ window.addEventListener('DOMContentLoaded', async () => {
 						}
 						for (const option of dropdownIconPresent){
 							const value = option.value
-  							if (promo.iconpresent.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
+  							if (promo.iconPresent.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
   							else { option.removeAttribute('selected');}
 						}
 						for (const option of dropdownIconMidPresent){
 							const value = option.value
-  							if (promo.iconmidpresent.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
+  							if (promo.iconMidPresent.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
   							else { option.removeAttribute('selected');}
 						}
 						//promoForm['iconmidpresent'].value = promo.iconMidPresent
@@ -312,11 +335,6 @@ promoForm.addEventListener('submit', async(e) => {
 	const placeId = localStorage.getItem("placeID");
 	const doc = await getPlace(placeId);
 	const place = doc.data();
-	
-	const tags = document.querySelector('#tags');
-	//const icon = document.querySelector('#icon');	
-	
-	//const fields = {};
 	const fields = {
 		company: place.company,
 		editor: place.editor ?? "",
@@ -329,10 +347,36 @@ promoForm.addEventListener('submit', async(e) => {
 	//console.log(fields.company, fields.editor, fields.test);
 
 	const mtags = []
+	const tags = document.querySelector('#tags');
 	for (const option of tags){
 		const value = option.value
 		if(option.selected){
 			mtags.push(value)
+		}
+	}
+
+	const masks = []
+	const valid = Number(promoForm['numberOfValidations'].value) + 1;
+	for (let i = 0; i < valid; i++) {
+		masks.push("");
+	}
+	fields.mask = masks;
+
+	for (const option of dropdownImage){
+		const value = option.value
+		if(option.selected){
+			if(value != "" || value != null){
+				fields.imageUrl  = value
+			}
+		}
+	}
+
+	for (const option of dropdownImageValAd){
+		const value = option.value
+		if(option.selected){
+			if(value != "" || value != null){
+				fields.imageValAd  = value
+			}
 		}
 	}
 
@@ -364,6 +408,7 @@ promoForm.addEventListener('submit', async(e) => {
 	}
 
 	var myDate = promoForm['enddate'].value
+	//var myDate = formatDate(promoForm['enddate'].value);
 	//const myDate = document.querySelector('#enddate');
 	//console.log(myDate)
 	myDate = myDate.split("-");
@@ -373,28 +418,23 @@ promoForm.addEventListener('submit', async(e) => {
 	fields.isDemo = promoForm['isdemo'].checked
 	fields.name = promoForm['name'].value
 	fields.description = promoForm['description'].value
-	fields.order = Number(promoForm['order'].value)
+	fields.order = Number(promoForm['order'].value) ?? 0
 	fields.tags = mtags
 	fields.bgColor = promoForm['bgcolor'].value
 	fields.textColor = promoForm['textcolor'].value
 	fields.titleColor = promoForm['titlecolor'].value
-	fields.imageUrl = promoForm['imageurl'].value
-	fields.imageValAd = promoForm['imagevalad'].value
-	//fields.icon = icon
-	//fields.iconMidPresent = promoForm['iconmidpresent'].value
-	//fields.iconPresent = promoForm['iconpresent'].value
-	fields.numberOfValidations = Number(promoForm['numberOfValidations'].value)
-	fields.maxValxDay = Number(promoForm['maxvalxday'].value)
-	fields.midPresentAt = Number(promoForm['midPresentAt'].value)
+	fields.numberOfValidations = Number(promoForm['numberOfValidations'].value) ?? 5
+	fields.maxValxDay = Number(promoForm['maxvalxday'].value) ?? 0
+	fields.midPresentAt = Number(promoForm['midPresentAt'].value) ?? 0
 	fields.expires = promoForm['expires'].checked
-	fields.endDate = newDate
-	fields.ndop = Number(promoForm['dias'].value)
+	//fields.endDate = myDate //newDate
+	fields.ndop = Number(promoForm['dias'].value) ?? 0
 	fields.reAdd = promoForm['readd'].checked
 	fields.multiValidation = promoForm['multivalidation'].checked
 	fields.sharedCode = promoForm['sharedcode'].value
-	fields.startWith = Number(promoForm['startwith'].value)
-	fields.lotteryId = promoForm['idsorteo'].value
-	fields.lotteryFrequency = Number(promoForm['lotteryfrequency'].value)
+	fields.startWith = Number(promoForm['startwith'].value) ?? 0
+	fields.lotteryId = promoForm['idsorteo'].value ?? null
+	fields.lotteryFrequency = Number(promoForm['lotteryfrequency'].value) ?? 0
 	fields.conditions = promoForm['conditions'].value
 	fields.cards = promoForm['cards'].value.split(",")
 
@@ -402,21 +442,33 @@ promoForm.addEventListener('submit', async(e) => {
 		//console.log('updating');
 		const promoId = promoForm['id'];
 		//console.log(id);
-		//updatePromo(placeId, promoId, fields);
+		updatePromo(placeId, promoId, fields);
 		console.log(fields.icon, fields.iconPresent, fields.iconMidPresent)
 		editStatus = false;
 		promoForm['btn-promo-save'].innerText = "ADD";
 	} else {
 		fields.created = new Date();
+		fields.endDate = newDate;
 		console.log(fields.icon, fields.iconPresent, fields.iconMidPresent)
-		//savePromo(placeId,fields);
+		savePromo(placeId,fields);
 	}
+	imgUrlContainer.innerHTML = '';
+	imgValAdContainer.innerHTML = '';
 	iconContainer.innerHTML = '';
 	iconPresentContainer.innerHTML = '';
 	iconMidPresentContainer.innerHTML = '';
 	promoForm.reset();
 });
 
+dropdownImage.addEventListener('change', (e) => {
+	e.preventDefault();
+	displayImg(dropdownImage.options[dropdownImage.selectedIndex].value, 1);
+})
+
+dropdownImageValAd.addEventListener('change', (e) => {
+	e.preventDefault();
+	displayImgValAd(dropdownImageValAd.options[dropdownImageValAd.selectedIndex].value, 1);
+})
 
 dropdownIcon.addEventListener('change', (e) => {
 	e.preventDefault();
@@ -448,7 +500,12 @@ btnsClear.addEventListener('click', (e) => {
 	for (const option of promoForm['tags']){
 			option.removeAttribute('selected');
 	}
-
+	for (const option of dropdownImage){
+		option.removeAttribute('selected');
+	}
+	for (const option of dropdownImageValAd){
+		option.removeAttribute('selected');
+	}
 	for (const option of dropdownIcon){
 		option.removeAttribute('selected');
 	}
@@ -463,33 +520,47 @@ btnsClear.addEventListener('click', (e) => {
 	iconMidPresentContainer.innerHTML = '';
 })
 
-function readPlaceImages() {
-	const a = "adminWeb/" + localStorage.getItem("placeID") + "//"
-	console.log(a);
-	const listRef = ref(storage, a);
-	
+function readPromoImages() {
+	var path = usuario + "/promotions/";
+	const listRef = ref(storage, path);
+	dropdownImage.add(new Option("Seleccionar...", ""), undefined);
 	listAll(listRef).then((res)=>{
-		console.log(res)
+		//console.log(res)
 		res.items.forEach((itemRef, index) => {
-			listbox.add(new Option(itemRef.name, itemRef.name), undefined);
+			dropdownImage.add(new Option(itemRef.name, path + itemRef.name), undefined);
 		})
 	});
-	//var option = new Option("im", "sel");
-	//listbox.add(option, undefined);
-	listbox.add(new Option("im2", "sel2"), undefined);
 }
 
-function populateSelect(target, value){
-    if (!target){
-        return false;
-    }
-    else {
-        select = document.getElementById(target);
-        var opt = document.createElement('option');
-        opt.value = value;
-        opt.innerHTML = value;
-        select.appendChild(opt);
-    }
+function readPromoImagesValAd() {
+	var path = usuario + "/ads/";
+	const listRef = ref(storage, path);
+	dropdownImageValAd.add(new Option("Seleccionar...", ""), undefined);
+	listAll(listRef).then((res)=>{
+		//console.log(res)
+		res.items.forEach((itemRef, index) => {
+			dropdownImageValAd.add(new Option(itemRef.name, path + itemRef.name), undefined);
+		})
+	});
+}
+
+function readPromoIcons() {
+	var path = usuario + "/icons/";
+	const listRef = ref(storage, path);
+	dropdownIcon.add(new Option("Seleccionar...", ""), undefined);
+	dropdownIconMidPresent.add(new Option("Seleccionar...", ""), undefined);
+	dropdownIconPresent.add(new Option("Seleccionar...", ""), undefined);
+	listAll(listRef).then((res)=>{
+		//console.log(res)
+		res.items.forEach((itemRef, index) => {
+			let position = itemRef.name.search("02.");
+			if (position != -1){
+				dropdownIcon.add(new Option(itemRef.name, path + itemRef.name), undefined);
+				dropdownIconMidPresent.add(new Option(itemRef.name, path + itemRef.name), undefined);
+				dropdownIconPresent.add(new Option(itemRef.name, path + itemRef.name), undefined);
+			}
+		})
+	});
 }
 
 function displayImg(img){
@@ -504,7 +575,7 @@ function displayImg(img){
 
 function displayImgValAd(img){
 	imgValAdContainer.innerHTML = ``;
-	const imgRef = ref(storage, 'ads/'+img);
+	const imgRef = ref(storage, img);
 	//console.log(imgRef);
 	getDownloadURL(imgRef).then((url) => {
                     //console.log(url);
@@ -514,8 +585,10 @@ function displayImgValAd(img){
 
 function displayIcon(img, type){
 	var htmlCode = '';
-	const imgRef1 = ref(storage, 'icons/'+img+'01.png');
-	const imgRef2 = ref(storage, 'icons/'+img+'02.png');
+	var img1 = img.replace("02.", "01.");;
+
+	const imgRef1 = ref(storage, img1);
+	const imgRef2 = ref(storage, img);
 	
 	getDownloadURL(imgRef2).then((url) => {
 		htmlCode += `<div class="col">`;
@@ -535,17 +608,4 @@ function displayIcon(img, type){
 	});
 }
 
-function changeImage(input) {
-	var reader;
-  
-	if (input.files && input.files[0]) {
-	  reader = new FileReader();
-  
-	  reader.onload = function(e) {
-		preview.setAttribute('src', e.target.result);
-	  }
-  
-	  reader.readAsDataURL(input.files[0]);
-	}
-  }
 

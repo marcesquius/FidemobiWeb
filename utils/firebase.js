@@ -25,7 +25,7 @@ import {
 	GeoPoint 
   } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-firestore.js";
 
-import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-storage.js";
+import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL, listAll, deleteObject } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-storage.js";
  
 import { getFirebaseConfig } from './firebase-config.js';
 
@@ -63,6 +63,8 @@ export {
 	listAll,
 	ref,
 	uploadBytesResumable,
+	deleteObject,
+	GeoPoint,
 }
 
 // USER
@@ -102,7 +104,18 @@ export const onGetPlaces = (callback) => {
 	onSnapshot(queryRef, callback)
 }
 
-export const savePlace = (isDemo, company, address, phone, lat, lon, tags) => {
+export const savePlace = (newFields) => {
+	//console.log(newFields);
+	//const user = auth.currentUser;
+	newFields.editor = auth.currentUser.email;
+	addDoc(collection(db, 'places'), newFields);
+}
+
+export const updatePlace = (id, newFields) => {
+	updateDoc(doc(db, 'places', id), newFields)
+}
+
+export const savePlaces = (isDemo, company, address, phone, lat, lon, tags) => {
 	const user = auth.currentUser;
 	addDoc(collection(db, 'places'), {
 		editor: user.email,
@@ -117,7 +130,7 @@ export const savePlace = (isDemo, company, address, phone, lat, lon, tags) => {
 	});
 }
 
-export const updatePlace = (id, newFields) => {
+export const updatePlaces = (id, newFields) => {
 	//console.log(newFields.address)
 	const updateFields = {
 		address: newFields.address,
@@ -154,67 +167,13 @@ export const updatePromo = (placeId, promoId, newFields) => {
 }
 
 export const deletePromo = (placeId, promoId)  => deleteDoc(doc(db, 'places', placeId, 'promotion', promoId)); 
- 
 
-
-/**
- *
- // https://firebase.google.com/docs/web/learn-more#available-libraries
-// https://firebase.google.com/docs/reference/js/storage.uploadmetadata
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-auth.js";
-import { getFirestore, collection, onSnapshot, addDoc, getDocs, getDoc, updateDoc, deleteDoc, doc, query, where, GeoPoint } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-firestore.js";
-import { Geohash as gh } from "./geoHash.js";
-import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-storage.js";
-
-// https://firebase.google.com/docs/web/setup
-
-
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
-
-export {
-	auth,
-	onAuthStateChanged,
-	db,
-	onSnapshot,
-	collection,
-	getStorage,
-	ref,
-	listAll,
-	getDownloadURL,
-	uploadBytesResumable,
-}
-
-
-
-//const storageRef = ref(storage);
-//const iconsStorage = ref(storage,'icons');
-
-//const gh = Geohash();
-
-//const apikey = require('config')(functions.config().config.apikey)
-
-export const uploadImage = (file) => {
-	const storage = getStorage();
-	const storageRef = ref(storage, 'demo/' + file.name);
-
-	// 'file' comes from the Blob or File API
-	uploadBytes(storageRef, file).then((snapshot) => {
-		console.log('Uploaded a blob or file!');
-	});
-}
-
+// IMAGES
 export const fullUploadImage = (file) => {
 	const storage = getStorage();
 
 	// Create the file metadata
-	/** @type {any} *
+
 	const metadata = {
 		contentType: 'image/jpeg'
 	};
@@ -313,6 +272,65 @@ export const listImages = (dir) => {
 	  //return cars;
 	  return arrImg;
 }
+
+export const uploadImage = (file) => {
+	const storage = getStorage();
+	const storageRef = ref(storage, 'demo/' + file.name);
+
+	// 'file' comes from the Blob or File API
+	uploadBytes(storageRef, file).then((snapshot) => {
+		console.log('Uploaded a blob or file!');
+	});
+}
+
+/**
+ *
+ // https://firebase.google.com/docs/web/learn-more#available-libraries
+// https://firebase.google.com/docs/reference/js/storage.uploadmetadata
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-auth.js";
+import { getFirestore, collection, onSnapshot, addDoc, getDocs, getDoc, updateDoc, deleteDoc, doc, query, where, GeoPoint } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-firestore.js";
+import { Geohash as gh } from "./geoHash.js";
+import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL, listAll } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-storage.js";
+
+// https://firebase.google.com/docs/web/setup
+
+
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+export {
+	auth,
+	onAuthStateChanged,
+	db,
+	onSnapshot,
+	collection,
+	getStorage,
+	ref,
+	listAll,
+	getDownloadURL,
+	uploadBytesResumable,
+}
+
+
+
+//const storageRef = ref(storage);
+//const iconsStorage = ref(storage,'icons');
+
+//const gh = Geohash();
+
+//const apikey = require('config')(functions.config().config.apikey)
+
+
+
+
+
+
 
 export const statusChanged = () => {
 	onAuthStateChanged(auth, (user) => {
