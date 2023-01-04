@@ -73,7 +73,6 @@ window.addEventListener('DOMContentLoaded', async () => {
 	copyeditField.innerHTML += `   ( ` + placeId +` )`; 
 	//https://chart.googleapis.com/chart?cht=qr&chs=300x300&choe=UTF-8&chl=addP%3EvD6ckBw9K0byG7tO7tHl%3E
 
-
 	function formatDate(date) {
 		var d = new Date(date),
 			month = '' + (d.getMonth() + 1),
@@ -554,6 +553,7 @@ function readPromoIcons() {
 		//console.log(res)
 		res.items.forEach((itemRef, index) => {
 			let position = itemRef.name.search("02.");
+			console.log(position);
 			if (position != -1){
 				dropdownIcon.add(new Option(itemRef.name, path + itemRef.name), undefined);
 				dropdownIconMidPresent.add(new Option(itemRef.name, path + itemRef.name), undefined);

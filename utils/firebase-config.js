@@ -10,6 +10,7 @@ const config = {
   /* TODO: ADD YOUR FIREBASE CONFIGURATION OBJECT HERE */
   apiKey: "AIzaSyC2z0Iz2neFV8DCnNJi8qHrtTIZoDYRqJ8",
   authDomain: "fidemobi-4dade.firebaseapp.com",
+  databaseURL: "https://fidemobi-d1c19.firebaseio.com",
   projectId: "fidemobi-4dade",
   storageBucket: "fidemobi-4dade.appspot.com",
   messagingSenderId: "917953518823",

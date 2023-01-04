@@ -13,6 +13,7 @@ liActive.className += " active";
 //})
 
 logOutButtonElement.addEventListener('click', (e) => {
+	console.log("eeee");
 	e.preventDefault();
 	signOutUser();
 })

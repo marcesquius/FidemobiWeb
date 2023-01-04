@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp;">
+	<meta name="author" content="Marc Esquius">
+	<meta name="keywords" content="Cupotix">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="../img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>CUPOTIX | Users by Promotion</title>
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">	
+
+	<link href="../css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<div id="sidebar_container"></div>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+				<div id="headers_container" class="container"></div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Usuarios por Promoción</h1>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Seleccionar promoción:</h5>
+								</div>
+								<div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="h5">Comercio</div>
+                                            <select class="form-select form-control mb-3" name="places-list" id="places-list" aria-label="s"></select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="h5">Promoción</div>
+                                            <select class="form-select form-control mb-3" name="promotions-list" id="promotions-list" aria-label="s"></select>
+                                        </div>
+                                    </div>
+                                    
+								</div>
+							</div>
+
+							<div class="card flex-fill d-none" id="showhide">
+								<div class="card-header">
+
+									<h5 class="card-title mb-0">Users By Place & Promo</h5>
+								</div>
+								<div class="card-body">
+								<table class="table myTable table-hover my-0 display" id="myTable">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th class="d-none d-xl-table-cell">Phone</th>
+											<th class="d-none d-xl-table-cell">Last Validation</th>
+											<th>Status</th>
+											<th class="d-none d-md-table-cell">Validated</th>
+										</tr>
+									</thead>	
+									<tbody></tbody>
+								</table>
+								<div id="users-container"></div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<div id="footer_container"></div>
+
+		</div>
+	</div>
+
+	<script src="../utils/app.js"></script>
+	<script type="module" src="../js/pages-users.js"></script>
+
+	<script>
+		//$('#sliders').addClass('active');
+		//liActive.addClass('active');
+		function loadComponentFromFile(filepath, location) {
+
+			var client = new XMLHttpRequest();
+			client.open('GET', filepath);
+			client.onreadystatechange = function () {
+				location.innerHTML = client.responseText;
+			}
+			client.send();
+		}
+
+		var headers_container = document.getElementById("headers_container");
+		var content = loadComponentFromFile('./header.html', headers_container);
+		var sidebar_container = document.getElementById("sidebar_container");
+		var content = loadComponentFromFile('./sidebar.html', sidebar_container);
+		var footer_container = document.getElementById("footer_container");
+		var content = loadComponentFromFile('./footer.html', footer_container);
+	</script>
+
+	<script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+	<!--script>
+		document.addEventListener("DOMContentLoaded", function () {
+			//https://datatables.net/examples/basic_init/data_rendering.html
+			//document.getElementById('myTable').DataTable();
+			$('#myTable').DataTable({
+				paginate: false
+			});
+		});
+	</script-->
+
+</body>
+
+</html>

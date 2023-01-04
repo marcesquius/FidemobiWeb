@@ -7,6 +7,7 @@ import{
 	getPlace,
 	savePlace,
 	updatePlace,
+	deletePlace,
 	getStorage,
 	ref,
 	listAll,
@@ -31,12 +32,13 @@ const placeId = document.querySelector('#placeId');
 // IMAGE
 const dropdownImage = document.querySelector('#imageurl');
 const imgUrlContainer = document.getElementById('displayImgUrl');
-
+let imageUrl = '';
 
 var usuario = "";
 
 let id = '';
 let editStatus = false;
+
 
 logOutButtonElement.addEventListener('click', (e) => {
 	e.preventDefault();
@@ -57,13 +59,18 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 					placesContainer.innerHTML += `
 					<div class="card card-body mt-2 border-primaary">
+						<div class="row">
+                    		<div class="col"><h3 class="h5">${place.company}</h3></div>
+                    		<div class="col">
+                        		<button class="btn-delete btn btn-outline-danger btn-sm float-end" data-id="${doc.id}">X</button>
+                    		</div>
+                		</div>
 						<h3 class="h5">${place.name}</h3>
-						<p>${place.company}</p>
 						<p>${doc.id}</p>
 						<div>
 							<!-- button class="btn-delete btn btn-danger" data-id="${doc.id}">Delete</button -->
 							<button class="btn-edit btn btn-primary" data-id="${doc.id}">Editar</button>
-							<button class="btn-go-promos btn btn-secondary float-end" data-id="${doc.id}">Ver Promociones</button>
+							<!-- button class="btn-go-promos btn btn-secondary float-end" data-id="${doc.id}">Ver Promociones</button -->
 						</div>
 					</div>
 				`;
@@ -71,6 +78,23 @@ window.addEventListener('DOMContentLoaded', async () => {
 				})
 
 				///placesContainer.innerHTML = html;
+
+        		// DELETE
+        		const btnsDelete = placesContainer.querySelectorAll('.btn-delete')
+        		btnsDelete.forEach((btn) => {
+            		btn.addEventListener('click', async({ target: { dataset } }) => {
+                		console.log(dataset.id)
+                		var userPreference;
+                		if (confirm("¿Seguro que quiere borrar el Comercio?") == true) {
+                    		userPreference = "Comercio Borrado!";
+							btnsClear.click();
+                    		// const doc = await deletePlace(dataset.id); // Desactivado por peligroso
+                		} else {
+                    		userPreference = "Borrar Cancelado!";
+                		}
+                		console.log(userPreference);
+            		});
+        		})
 
 				// EDIT
 				const btnsEdit = placesContainer.querySelectorAll('.btn-edit')
@@ -99,13 +123,35 @@ window.addEventListener('DOMContentLoaded', async () => {
 						placeForm['lat'].value = place.point.geopoint.latitude
 						placeForm['lon'].value = place.point.geopoint.longitude
 
-						for (const option of dropdownImage){
+						//console.log("Data DB: " + place.imageUrl);
+						imageUrl = place.imageUrl;
+
+						// Rellenamos dropdown Image con placeId
+						//dropdownImage.add(new Option(dataset.id, "places/" + dataset.id + ".jpg"), undefined);
+
+						//for (const option of dropdownImage){
+						for (const option of placeForm['imageurl']){
 							const value = option.value
-  							if (place.imageUrl.indexOf(value) !== -1) {option.setAttribute('selected', 'selected');}
-  							else { option.removeAttribute('selected');}
+							//console.log("Value: "+ value);
+							//console.log("place.imageUrl: " + place.imageUrl);
+							//console.log("indexOf: " + place.imageUrl.indexOf(value));
+							if (!value){
+								option.removeAttribute('selected');
+							}else {
+								//console.log("Value: "+ value);
+								//console.log("dropdownImage: " + dropdownImage);
+								//console.log("placeForm['imageurl']: " + placeForm['imageurl']);
+								//console.log("imageurl: " + imageUrl);
+								if (place.imageUrl.indexOf(value) !== -1) {
+									//console.log("indexOf:" + place.imageUrl.indexOf(value));
+									option.setAttribute('selected', 'selected');
+									displayImg(place.imageUrl);
+								} else { 
+									option.removeAttribute('selected');
+								}
+							}
 						}
-						displayImg(place.imageUrl);
-						
+
 						const tags = placeForm['tags']
 						for (const option of tags) {
 							//const value = Number.parseInt(option.value);
@@ -208,15 +254,19 @@ placeForm.addEventListener('submit', (e) => {
 		editStatus = false;
 		placeForm['btn-place-save'].innerText = "AÑADIR";
 		alert('Datos comercio modificados');
+		btnsClear.click();
+		
 	} else {
 		savePlace(fields);
 		alert('Datos comercio creados');
+		btnsClear.click();
 	}
-	
+/*	
 	placeForm.reset(); // ponemos los campos a blanco
 	for (const option of placeForm['tags']){
 		option.removeAttribute('selected');
 	}
+*/
 });
 
 // RESET
@@ -225,11 +275,15 @@ placeForm.addEventListener('submit', (e) => {
 const btnsClear = document.querySelector('#btn-place-reset')
 btnsClear.addEventListener('click', (e) => {
 	e.preventDefault();
+	placeForm.reset(); // ponemos los campos a blanco
 	editStatus = false;
 	placeId.innerHTML = ``
 	imgUrlContainer.innerHTML = '';
 	placeForm['btn-place-save'].innerText = "AÑADIR";
 	placeForm.reset();
+	for (const option of placeForm['imageurl']){
+		option.removeAttribute('selected');
+	}
 	for (const option of placeForm['tags']){
 			option.removeAttribute('selected');
 	}
@@ -238,18 +292,24 @@ btnsClear.addEventListener('click', (e) => {
 
 dropdownImage.addEventListener('change', (e) => {
 	e.preventDefault();
-	displayImg(dropdownImage.options[dropdownImage.selectedIndex].value, 1);
+	//var path =  "places/" + id + ".jpg";
+	//if (dropdownImage.options[dropdownImage.selectedIndex].value != id ){
+		displayImg(dropdownImage.options[dropdownImage.selectedIndex].value, 1);
+	//} else {
+		//displayImg(path,1);
+	//}
+
+	
 })
-
-
 
 function readPlaceImages() {
 	var path = usuario + "/places/";
+	//var path = "places/";
 
 	const listRef = ref(storage, path);
 
 	dropdownImage.add(new Option("Seleccionar...", ""), undefined);
-
+	
 	listAll(listRef).then((res)=>{
 		//console.log(res)
 		res.items.forEach((itemRef, index) => {
@@ -267,6 +327,6 @@ function displayImg(img){
 	const imgRef = ref(storage, img);
 	//console.log(imgRef);
 	getDownloadURL(imgRef).then((url) => {
-        imgUrlContainer.innerHTML += `<img class="img-responsive img-thumbnail" src="${url}">`;
+        imgUrlContainer.innerHTML = `<img class="img-responsive img-thumbnail" src="${url}">`;
     });
 }

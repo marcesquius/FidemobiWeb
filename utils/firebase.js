@@ -12,9 +12,11 @@ import {
 
 import { 
 	getFirestore, 
-	collection, 
+	collection,
+	collectionGroup,
 	onSnapshot, 
-	addDoc, 
+	addDoc,
+	setDoc,
 	getDocs, 
 	getDoc, 
 	updateDoc, 
@@ -93,6 +95,48 @@ export function signOutUser() {
 	  });;
   }
 
+export const userExist = async(phoneNumber, callback) => {
+	//docRef = collection("users").where("phone","==",phoneNumber);
+	const docRef = collection(db, 'users')
+	const queryRef = query(docRef, where("phone","==",phoneNumber))
+    const docSnap = await getDocs(queryRef);
+	var id = "";
+	//console.log(docSnap.size);
+	//return docSnap.size;
+	docSnap.forEach((doc)=>{
+		//phone = doc.data().phone;
+		id = doc.id
+	});
+	return id;
+}
+
+export const userPromoExist = (userId, promoId, callback) => getDoc(doc(db, 'users', userId, 'promotions', promoId));
+
+export const addPromoToUser = (userId, promoId, promoData) => {
+	promoData.created = new Date();
+	promoData.lastValidation = new Date();
+	promoData.validated = 0;
+	delete promoData.isDemo;
+	delete promoData.point;
+	setDoc(doc(db, 'users', userId, 'promotions', promoId), promoData);
+}
+
+/*
+{
+	const docRef = collection(db, 'users', userId, 'promotions', promoId);
+	const docSnap = getDoc(docRef)
+}
+*/
+export const getUser = (id) => getDoc(doc(db, 'users', id));
+
+export const onGetUserByPromo = (placeId, callback) => {
+	//const place = "vD6ckBw9K0byG7tO7tHl";
+	//const promo = "6CioUfpDgrpPYQADszIr";
+	const promosRef = collectionGroup(db, 'promotions');
+	const queryRef = query(promosRef, where("placeId", "==", placeId));
+	onSnapshot(queryRef, callback)
+} 
+
 // PLACES
 export const getPlaceId = (id) => id; //console.log(id);
 
@@ -104,17 +148,26 @@ export const onGetPlaces = (callback) => {
 	onSnapshot(queryRef, callback)
 }
 
-export const savePlace = (newFields) => {
-	//console.log(newFields);
-	//const user = auth.currentUser;
+export const savePlace = async(newFields) => {
+	const placesRef = collection(db,'places') // collectionRef
+	const placeRef = doc(placesRef) // docRef
+	const id = placeRef.id // a docRef has an id property
+	newFields.id = id;
+	newFields.editor = auth.currentUser.email;
+	await setDoc(placeRef, newFields) // create the document
+/* This is OK
 	newFields.editor = auth.currentUser.email;
 	addDoc(collection(db, 'places'), newFields);
+*/
 }
 
 export const updatePlace = (id, newFields) => {
 	updateDoc(doc(db, 'places', id), newFields)
 }
 
+export const deletePlace = (placeId) => deleteDoc(doc(db, 'places', placeId)); 
+
+/*
 export const savePlaces = (isDemo, company, address, phone, lat, lon, tags) => {
 	const user = auth.currentUser;
 	addDoc(collection(db, 'places'), {
@@ -129,6 +182,7 @@ export const savePlaces = (isDemo, company, address, phone, lat, lon, tags) => {
 		tags: tags,
 	});
 }
+*/
 
 export const updatePlaces = (id, newFields) => {
 	//console.log(newFields.address)
@@ -148,8 +202,15 @@ export const updatePlaces = (id, newFields) => {
 
 
 // PROMOTION
-export const savePromo = (placeId, newfields) => {
-	addDoc(collection(db, 'places', placeId, 'promotion'), newfields);
+export const savePromo = async(placeId, newfields) => {
+	//addDoc(collection(db, 'places', placeId, 'promotion'), newfields);
+	const promosRef = collection(db, 'places', placeId, 'promotion');
+	const promoRef = doc(promosRef);
+	const id = promoRef.id;
+	newfields.id = id;
+	newfields.editor = auth.currentUser.email;	
+	//console.log(newfields);
+	await setDoc(promoRef, newfields);
 }
 
 export const onGetPromos = (id, callback) => {
@@ -167,6 +228,33 @@ export const updatePromo = (placeId, promoId, newFields) => {
 }
 
 export const deletePromo = (placeId, promoId)  => deleteDoc(doc(db, 'places', placeId, 'promotion', promoId)); 
+
+export const onGetPromotions = (callback) => {
+	//console.log(auth.currentUser.email);
+	const promosRef = collectionGroup(db, 'promotion')
+	const queryRef = query(promosRef, where("editor", "==", auth.currentUser.email));
+	onSnapshot(queryRef, callback)
+}
+
+// BANNERS
+export const getBanner = (placeId, addId) => getDoc(doc(db, 'places', placeId, 'ads', addId));
+
+export const onGetBanners = (callback) => {
+	const bannersRef = collectionGroup(db, 'ads')
+	//const queryRef = query(bannersRef);
+	const queryRef = query(bannersRef, where("editor", "==", auth.currentUser.email));
+	onSnapshot(queryRef, callback)
+	//const ads = query(collectionGroup(db, 'ads'), where('editor', '==', auth.currentUser.email));
+	//const queryRef = await getDocs(ads);
+}
+
+export const onGetBannersById = (placeId, callback) => {
+	//console.log(placeId);
+	//const adsRef = await getDocs(collection(db, 'places'));
+	const adsRef = collection(db, 'places', placeId, 'ads');
+	onSnapshot(adsRef, callback)
+}
+
 
 // IMAGES
 export const fullUploadImage = (file) => {
@@ -281,6 +369,21 @@ export const uploadImage = (file) => {
 	uploadBytes(storageRef, file).then((snapshot) => {
 		console.log('Uploaded a blob or file!');
 	});
+}
+
+//// Others
+export function formatDate(date) {
+	var d = new Date(date),
+		month = '' + (d.getMonth() + 1),
+		day = '' + d.getDate(),
+		year = d.getFullYear();
+
+	if (month.length < 2) 
+		month = '0' + month;
+	if (day.length < 2) 
+		day = '0' + day;
+
+	return [day, month, year].join('-');
 }
 
 /**

@@ -14,7 +14,7 @@
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
 
-	<title>Places Page | Cupotix</title>
+	<title>Blank Page | AdminKit Demo</title>
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -36,21 +36,31 @@
 			<main class="content">
 				<div class="container-fluid p-0">
 
-					<h1 class="h3 mb-3">Datos Comercio</h1>
+					<h1 class="h3 mb-3">Datos Banners Publicitarios</h1>
 
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<h5 class="card-title mb-0">Añade o modifica datos del comercio</h5>
+									<!-- h5 class="card-title mb-0">Añade o modifica datos del Banner</h5 -->
+									<div class="container">
+										<div class="row">
+											<div class="col-lg-4">
+                                    			<div class="h5">Comercio</div>
+                                    				<select class="form-select form-control mb-3" name="placeslist" id="placeslist" aria-label="s"></select>
+                                    			<div class="container" id="promotions-container"></div>
+                                            </div>
+                                        </div>
+                                    </div>
 								</div>
 								<div class="card-body">
-									<div class="container">
+									<div class="container d-none" id="showhide">
 										<div class="row">
 											<div class="col-lg-8">
 								
-												<form id="place-form">
+												<form id="banner-form">
 													<div class="card mb-3">
+                                                        
 														<div class="card-header">
 															<div class="container">
 																<div class="row">
@@ -69,7 +79,6 @@
 								
 								
 															</div>
-								
 														</div>
 								
 														<div class="card-body">
@@ -81,8 +90,8 @@
 																</div -->
 								
 																<div class="col">
-																	<label for="company">Company:</label>
-																	<input type="text" name="company" placeholder="" id="company"
+																	<label for="title">Título:</label>
+																	<input type="text" name="title" placeholder="" id="title"
 																		value="" class="form-control mb-3">
 																</div>
 
@@ -160,10 +169,10 @@
 											<div class="col-lg-4">
 												<div class="card mb-3">
 													<div class="card-header">
-														<div class="h3">Comercios</div>
+														<div class="h3">Banners</div>
 													</div>
 													<div class="card-body">
-														<div class="container" id="places-container"></div>
+														<div class="container" id="banners-container"></div>
 													</div>
 												</div>	
 											</div>
@@ -183,7 +192,7 @@
 	</div>
 
 	<script src="../utils/app.js"></script>
-	<script type="module" src="../js/pages-places.js"></script>
+	<script type="module" src="../js/pages-banners.js"></script>
 	<script>
 		//$('#sliders').addClass('active');
 		//liActive.addClass('active');
@@ -207,3 +216,32 @@
 </body>
 
 </html>
+
+<!-- 
+addId "1fwWzK8UgcdrgpSQjKFQ" 
+
+title "SORTEO AIRPODS" 
+name "SORTEO AIRPODS"    
+shareMessage "Participa en el sorteo de unos Airpods 3a gen con Cupotix APP"
+
+
+startDate November 1, 2022 at 12:00:00 AM UTC+1
+endDate December 22, 2022 at 12:00:00 AM UTC+1
+
+imageUrl "sorteo_ipods.png"
+
+
+
+isLinkable false
+sendToUrl ""
+
+showDown false
+showUp true
+
+placeId "vD6ckBw9K0byG7tO7tHl"
+
+
+
+
+
+-->

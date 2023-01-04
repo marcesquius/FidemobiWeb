@@ -14,7 +14,7 @@
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
 
-	<title>AdminKit Demo - Bootstrap 5 Admin Template</title>
+	<title>CUPOTIX - Users by promotion</title>
 
 	<link href="../css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -309,29 +309,26 @@
 		</div>
 	</div>
 
-	<script src="../utils/app.js"></script>
-	<script type="module" src="../js/main.js"></script>
+	
 	<script>
-		//$('#sliders').addClass('active');
-		//liActive.addClass('active');
 		function loadComponentFromFile(filepath, location) {
-
 			var client = new XMLHttpRequest();
 			client.open('GET', filepath);
 			client.onreadystatechange = function() {
-			 	location.innerHTML = client.responseText;
+				if  (client.responseText != ""){
+					//console.log(client.responseText);
+					location.innerHTML = client.responseText;
+				}
 			}
 			client.send();
 	  	}
 		var headers_container = document.getElementById("headers_container");
-		var content = loadComponentFromFile('./header.html', headers_container);	 
+		var content = loadComponentFromFile('header.html', headers_container);	 
 	  	var sidebar_container = document.getElementById("sidebar_container");
-	  	var content = loadComponentFromFile('./sidebar.html', sidebar_container);
+	  	var content = loadComponentFromFile('sidebar.html', sidebar_container);
 		var footer_container = document.getElementById("footer_container");
-	  	var content = loadComponentFromFile('./footer.html', footer_container);
+	  	var content = loadComponentFromFile('footer.html', footer_container);
 	</script>
-
-
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
@@ -554,6 +551,9 @@
 			});
 		});
 	</script>
+
+	<script src="../js/main.js" type="module"></script>
+	<script src="../utils/app.js"></script>
 
 </body>
 

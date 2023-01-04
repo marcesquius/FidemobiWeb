@@ -49,11 +49,20 @@
 						<div class="col-12">
 							<div class="card">
 								<div class="card-header">
-									<button class="btn" onclick="history.back()"> << Go Back</button>
+                                    <div class="container">
+										<div class="row">
+											<div class="col-lg-4">
+                                    			<div class="h5">Comercio</div>
+                                    				<select class="form-select form-control mb-3" name="placeslist" id="placeslist" aria-label="s"></select>
+                                    			<div class="container" id="promotions-container"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+									<!-- button class="btn" onclick="history.back()"> << Go Back</button -->
 									<!-- h5 class="card-title mb-0">Añade o modifica datos del comercio</h5 -->
 								</div>
 								<div class="card-body">
-									<div class="container">
+									<div class="container d-none" id="tres">
 										<div class="row">
 											<div class="col-lg-8">
 								
@@ -85,9 +94,10 @@
 															<div class="row">
 																<div class="col">
 																	<label for="name">Nombre de la promo:</label>
-																	<input type="text" name="name" placeholder="" id="name" value=""
+																	<input type="text" name="name" placeholder="" id="namae" value=""
 																		class="form-control mb-3">
 																</div>
+								
 																<div class="col">
 																	<label for="description">Descripción:</label>
 																	<input type="text" name="description" placeholder="" id="description" value=""
@@ -224,7 +234,7 @@
 																</div>
 								
 																<div class="col-4">
-																	<label for="maxValxDay">Máximo número validaciones dia</label>
+																	<label for="maxValxDay">Máx. número validaciones dia</label>
 																	<input type="text" name="maxvalxday" placeholder="" id="maxvalxday" class="form-control mb-3">
 																</div>
 								
@@ -379,8 +389,7 @@
 	</div>
 
 	<script src="../utils/app.js"></script>
-	<script type="module" src="../js/pages-promotions.js"></script>
-
+	<script type="module" src="../js/pagePromotions.js"></script>
 	<script>
 		//$('#sliders').addClass('active');
 		//liActive.addClass('active');
@@ -405,6 +414,8 @@
 		<script type="text/javascript">
 			$(function () {
 				$('#enddate').datepicker({
+					setDate: new Date(2008,9,03),
+					defaultDate: '26-01-2023',
 					format: {
 						/*
 						 * Say our UI should display a week ahead,
