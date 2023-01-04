@@ -383,7 +383,7 @@ promoForm.addEventListener('submit', async(e) => {
 		const value = option.value
 		if(option.selected){
 			if(value != "" || value != null){
-				fields.icon  = value
+				fields.icon = value
 			}
 		}
 	}	
@@ -392,7 +392,7 @@ promoForm.addEventListener('submit', async(e) => {
 		const value = option.value
 		if(option.selected){
 			if(value != "" || value != null){
-				fields.iconPresent  = value
+				fields.iconPresent = value
 			} 
 		}
 	}
@@ -400,8 +400,14 @@ promoForm.addEventListener('submit', async(e) => {
 	for (const option of dropdownIconMidPresent){
 		const value = option.value
 		if(option.selected){
-			if(value != "" || value != null){
-				fields.iconMidPresent  = value
+			//console.log('********')
+			//console.log(value)
+			if(value != ""){
+				console.log('Diferente de blank')
+				fields.iconMidPresent = value
+			} else {
+				console.log('Aqui')
+				fields.iconMidPresent = null
 			}
 		}
 	}
@@ -426,7 +432,7 @@ promoForm.addEventListener('submit', async(e) => {
 	fields.maxValxDay = Number(promoForm['maxvalxday'].value) ?? 0
 	fields.midPresentAt = Number(promoForm['midPresentAt'].value) ?? 0
 	fields.expires = promoForm['expires'].checked
-	//fields.endDate = myDate //newDate
+	fields.endDate = newDate
 	fields.ndop = Number(promoForm['dias'].value) ?? 0
 	fields.reAdd = promoForm['readd'].checked
 	fields.multiValidation = promoForm['multivalidation'].checked
@@ -461,27 +467,53 @@ promoForm.addEventListener('submit', async(e) => {
 
 dropdownImage.addEventListener('change', (e) => {
 	e.preventDefault();
-	displayImg(dropdownImage.options[dropdownImage.selectedIndex].value, 1);
+	if (dropdownImage.options[dropdownImage.selectedIndex].value != ""){
+		displayImg(dropdownImage.options[dropdownImage.selectedIndex].value, 1);
+	} else {
+		imgUrlContainer.innerHTML = '';
+	}
+	
 })
 
 dropdownImageValAd.addEventListener('change', (e) => {
 	e.preventDefault();
-	displayImgValAd(dropdownImageValAd.options[dropdownImageValAd.selectedIndex].value, 1);
+	if (dropdownImageValAd.options[dropdownImageValAd.selectedIndex].value != ""){
+		displayImgValAd(dropdownImageValAd.options[dropdownImageValAd.selectedIndex].value, 1);
+	} else {
+		imgValAdContainer.innerHTML = '';
+	}
+	
 })
 
 dropdownIcon.addEventListener('change', (e) => {
 	e.preventDefault();
-	displayIcon(dropdownIcon.options[dropdownIcon.selectedIndex].value, 1);
+	//console.log(dropdownIcon.options[dropdownIcon.selectedIndex].value, 1);
+	if (dropdownIcon.options[dropdownIcon.selectedIndex].value != ""){
+		displayIcon(dropdownIcon.options[dropdownIcon.selectedIndex].value, 1);
+	} else {
+		iconContainer.innerHTML = '';
+	}
+	
 })
 
 dropdownIconPresent.addEventListener('change', (e) => {
 	e.preventDefault();
-	displayIcon(dropdownIconPresent.options[dropdownIconPresent.selectedIndex].value, 2);
+	if (dropdownIconPresent.options[dropdownIconPresent.selectedIndex].value !=""){
+		displayIcon(dropdownIconPresent.options[dropdownIconPresent.selectedIndex].value, 2);
+	} else {
+		iconPresentContainer.innerHTML = '';
+	}
+	
 })
 
 dropdownIconMidPresent.addEventListener('change', (e) => {
 	e.preventDefault();
-	displayIcon(dropdownIconMidPresent.options[dropdownIconMidPresent.selectedIndex].value, 3);
+	if (dropdownIconMidPresent.options[dropdownIconMidPresent.selectedIndex].value != ""){
+		displayIcon(dropdownIconMidPresent.options[dropdownIconMidPresent.selectedIndex].value, 3);
+	} else {
+		iconMidPresentContainer.innerHTML = '';
+	}
+	
 })
 
 const btnsClear = document.querySelector('#btn-promo-reset')
